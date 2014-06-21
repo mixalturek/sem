@@ -1,0 +1,64 @@
+
+#BUILD_PREFIX = build/out/
+BUILD_PREFIX = ./
+
+TARGET_CLIENT   = $(BUILD_PREFIX)bjs
+TARGETD_CLIENT  = $(BUILD_PREFIX)bjs-debug
+TARGETR_CLIENT  = $(BUILD_PREFIX)bjs-release
+
+TARGET_SERVER   = $(BUILD_PREFIX)bjs-server
+TARGETD_SERVER  = $(BUILD_PREFIX)bjs-server-debug
+TARGETR_SERVER  = $(BUILD_PREFIX)bjs-server-release
+
+CC              = g++
+#CC              = g++-3.3 # GCC 3.3 doen;t work :-) Some problem with liking
+#CFLAGS          = -Wall -Wextra -Wcast-align
+CFLAGS = -Wall -Wcast-align  -I/Library/Frameworks/SDL.framework/Headers -I/Library/Frameworks/SDL_mixer.framework/Headers  -I/Library/Frameworks/SDL_image.framework/Headers  -I/System/Library/Frameworks/OpenGL.framework/Headers `freetype-config --cflags` -I/Library/Frameworks/SDL_ttf.framework/Headers
+ 
+#SDLMAIN         = SDLMain.m				  # ./src/common/platform/macosx_ppc/SDLMain.m
+SDLMAIN         =  ./macosx_ppc/SDLMain.m
+LIBS            = `freetype-config --libs` -lftgl -framework SDL -framework Cocoa -framework OpenGL -framework SDL_image -framework SDL_mixer -framework SDL_ttf
+
+OBJECTFILES_S   = $(shell find . -name '*.cpp' | grep -v '/client/' | grep -v 'win32'  | sed 's/.cpp/.o/')
+OBJECTFILES_C   = $(shell find . -name '*.cpp' | grep -v '/server/' | grep -v 'win32'  | sed 's/.cpp/.o/')
+CPPFILES_S      = $(shell find . -name '*.cpp' | grep -v '/client/' | grep -v 'win32'  )
+CPPFILES_C      = $(shell find . -name '*.cpp' | grep -v '/server/' | grep -v 'win32'  )
+INCLUDES        = $(shell find . -type d | grep '/include' | grep -v '.svn'  | sed 's/\./-I\./') -I./src/libs  -I./src/libs/MathGL++
+
+#test:
+#	echo "Includes: $(INCLUDES)"
+#	echo "Client:  $(OBJECTFILES_C)"
+#	echo "Server:  $(OBJECTFILES_S)"
+
+all: $(TARGET_CLIENT) $(TARGET_SERVER)
+
+$(TARGET_CLIENT): $(OBJECTFILES_C)
+	g++ $(OBJECTFILES_C) $(LIBS) $(CFLAGS) -o $@ $(SDLMAIN)
+
+$(TARGET_SERVER): $(OBJECTFILES_S)
+	g++ $(OBJECTFILES_S) $(LIBS) $(CFLAGS) -o $@ $(SDLMAIN)
+	
+%.o: %.cpp
+	$(CC) -c $< $(CFLAGS) -o $@ $(INCLUDES) -D_DEBUG
+
+debug: 
+	echo "Compilig debug client.."
+	$(CC) -g3 $(CPPFILES_C) $(LIBS) $(CFLAGS) -o $(TARGETD_CLIENT) -DDEBUG -D_DEBUG $(INCLUDES) $(SDLMAIN)
+	echo "Compilig debug server.."
+	$(CC) -g3 $(CPPFILES_S) $(LIBS) $(CFLAGS) -o $(TARGETD_SERVER) -DDEBUG -D_DEBUG $(INCLUDES) $(SDLMAIN)
+	echo "Enjoy debugging"
+
+release: 
+	echo "Compilig release client.."
+	$(CC) -O3 $(CPPFILES_C) $(LIBS) $(CFLAGS) -o $(TARGETR_CLIENT) $(INCLUDES) $(SDLMAIN) -DNDEBUG
+	echo "Compilig release server.."
+	$(CC) -O3 $(CPPFILES_S) $(LIBS) $(CFLAGS) -o $(TARGETR_SERVER) $(INCLUDES) $(SDLMAIN) -DNDEBUG
+	echo "Enjoy playing :-)"
+
+
+depend:
+	makedepend -- $(INCLUDES) $(CFLAGS)  -I/usr/include/stlport/ -- $(CPPFILES_C) $(CPPFILES_S)
+
+clean:
+	rm -f $(OBJECTFILES_C) $(OBJECTFILES_S)  core* $(TARGET_CLIENT) $(TARGETD_CLIENT) $(TARGET_SERVER) $(TARGETD_SERVER) *.log  log/*.log $(TARGETR_CLIENT) $(TARGETR_SERVER)
+

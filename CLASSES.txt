@@ -1,0 +1,26 @@
+CApplication			- general application class
+	CApplicationEx		- extended application (splash img, fps, fonts)
+		CFirstApp	- class of the real application
+
+CMenu				- general menu class
+	CSimpleMenu		- rendering of menu
+
+CSceneObject			- general object in the scene
+	CCamera			- 3D camera class
+	CTerrain		- terrain class
+	CBillboard		- textured billboard (object from one quad)
+		CBullet		- bullet class for shooting
+		CParticle	- class of one particle
+		CPlayer		- player class (not implemented yet)
+	CParticleEngine		- particle engine
+
+CSceneObjectManager		- Objects manager (sorting of transparent objs)
+CTextureManager			- texture manager
+CImage				- image class (SDL_Image)
+CGLExt				- support for OpenGL extensions
+CVector				- 3D vector class
+CColor				- RGBA color class
+CIni				- .INI configuration support
+CFont				- text support (SDL_ttf)
+CGrid				- objects from lines
+CCheat				- cheat class

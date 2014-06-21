@@ -1,0 +1,9 @@
+
+sem - http://woq.nipax.cz/sem/
+
+Aplikace pøedstavuje hru ve stylu klasického Scorche nebo Wormsù. Zatím umo¾òuje pouze chození po vý¹kových mapách a støílení vèetnì kolizí s terénem a výbuchy. Hra je napsána v programovacím jazyce C++ (èistý OOP), vyu¾ívá knihoven STL (standardní knihovna C++), SDL (aplikaèní kód), SDL_image (nahrávání obrázkù), SDL_ttf (zobrazování textù) a OpenGL (rendering). Aplikace je také je pøipravena pro pou¾ití gettextu (jazykové mutace), ten v¹ak je¹tì nebyl napojen.
+
+Aplikace je ¹íøena pod licencí GNU GPL, tøídy základního kódu pod licencí GNU LGPL.
+
+Michal Turek
+http://woq.nipax.cz/

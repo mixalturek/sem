@@ -1,0 +1,21 @@
+
+External dependencies
+=====================
+Automatical checking has not been implemented yet :-(
+
+Standard developping tools		gcc, g++, make, makedepend
+Drivers for your video card		http://www.nvidia.com/ , http://www.ati.com/
+Devel package for SDL			http://www.libsdl.org/
+Devel package for SDL_image		http://www.libsdl.org/projects/SDL_image/
+Devel package for SDL_ttf		http://www.libsdl.org/projects/SDL_ttf/
+
+
+Compile and run
+===============
+$ cd <project_directory>
+$ make clean
+$ make depend
+$ make
+$ vim cfg/basecode.ini
+$ make run
+
