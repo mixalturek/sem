@@ -1,0 +1,12 @@
+body
+{
+	background-color: white;
+	background-image: none;
+	color: black;
+}
+
+#main { padding: 0px; margin: 0px; border: none; }
+#menu, #footer, #main_logo, #sh_logo	{ display: none; }
+
+a:hover, .m:hover		{ color: black; }
+a.blank:after, a.down:after	{ content: ""; }

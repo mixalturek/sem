@@ -1,0 +1,47 @@
+body
+{
+	background-color: black;
+	color: white;
+	font-family: Verdana, "Bitstream Vera Sans", Geneva, sans-serif;
+	font-size: 10pt;
+	line-height: 1.6em;
+	text-align: justify;
+}
+
+#page { width: 640px; margin: 30px auto; }
+
+#main, #menu, #footer { background-color: black; padding: 10px; border: 1px solid rgb(44,54,72); }
+
+#main		{ margin-top: 0px; }
+#menu		{ margin-bottom: 7px; padding-top: 3px; padding-bottom: 3px; text-align: center; color: rgb(44,54,72); }
+#footer		{ margin-top: 7px;  line-height: 1.2em; text-align: center; }
+#main_logo	{ }
+
+#menu div a	{ font-style: normal; }
+#menu .active	{ color: red; }
+
+fieldset	{ padding: 10px; }
+textarea	{ max-width: 100%; }
+img		{ border: none; }
+div.img		{ font-style: italic; text-align: center; margin: 20px; }
+div.img a	{ text-decoration: none; }
+code		{ text-align: left; }
+h1		{ text-align: center; margin-top: 20px; margin-bottom: 30px; }
+h3		{ margin-top: 30px; margin-bottom: -10px; }
+pre		{ overflow: auto; font-size: 9pt; line-height: 1.2em; }
+
+form		{ margin-bottom: 0px; }
+input		{ max-width: 100%; }
+
+a, .m		{ color: rgb(90,110,150); text-decoration: none; }
+a:hover, .m:hover	{ color: red; }
+a.blank:after	{ content: " " url(img/p_blank.gif); }
+a.down:after	{ content: " " url(img/p_down.gif); }
+a.blank:hover:after	{ content: " " url(img/p_blank_hover.gif); }
+a.down:hover:after	{ content: " " url(img/p_down_hover.gif); }
+
+.warn		{ color: red; font-weight: bold; }
+.todo		{ color: red; font-weight: bold; }
+.invalid_link	{ color: blue; font-weight: bold; }
+.todo:before	{ content: "TODO: "; }
+.invalid_link:before	{ content: "Neplatný odkaz: "; }
